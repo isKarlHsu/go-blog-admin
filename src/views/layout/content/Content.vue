@@ -9,14 +9,17 @@
       </el-col>
     </el-row>
   </div>
+  <Breadcrumb/>
   <div class="wrapper">
     <router-view />
   </div>
 </template>
 
 <script>
+import Breadcrumb from "../../../components/breadcrumb/Breadcrumb.vue";
 export default {
-  name: "Content"
+  name: "Content",
+  components: {Breadcrumb}
 }
 </script>
 

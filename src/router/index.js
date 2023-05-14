@@ -15,35 +15,56 @@ const router = createRouter({
             path: '/',
             name: 'layout',
             component: Layout,
+            meta: {
+              title: "首页"
+            },
             children: [
                 {
                     path: '/',
                     name: 'home',
-                    component: Home
+                    component: Home,
+                    meta: {
+                        title: '首页'
+                    }
                 },
                 {
                     path: '/post',
                     name: 'post',
+                    meta: {
+                        title: "发布管理"
+                    },
                     children: [
                         {
                             path: '/article',
                             name: 'article',
-                            component: Article
+                            component: Article,
+                            meta: {
+                                title: "文章列表"
+                            }
                         },
                         {
                             path: '/article-edit/:article_id',
                             name: 'article-edit',
-                            component: ArticleEdit
+                            component: ArticleEdit,
+                            meta: {
+                                title: "编辑文章"
+                            }
                         },
                         {
                             path: '/category',
                             name: 'category',
-                            component: Category
+                            component: Category,
+                            meta: {
+                                title: "分类列表    "
+                            }
                         },
                         {
                             path: '/tag',
                             name: 'tag',
-                            component: Tag
+                            component: Tag,
+                            meta: {
+                                title: "标签"
+                            }
                         }
                     ]
                 }
