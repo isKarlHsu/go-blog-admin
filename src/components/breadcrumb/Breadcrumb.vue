@@ -1,10 +1,12 @@
 <template>
-  <el-breadcrumb :separator-icon="ArrowRight">
-<!--    <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>-->
-    <el-breadcrumb-item v-for="item in routers" :key="item.path" :to="{ path: item?.path }">
-      {{item?.meta?.title}}
-    </el-breadcrumb-item>
-  </el-breadcrumb>
+  <el-card class="breadcrumb">
+    <el-breadcrumb :separator-icon="ArrowRight">
+      <!--    <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>-->
+      <el-breadcrumb-item v-for="item in routers" :key="item.path" :to="{ path: item?.path }">
+        {{item?.meta?.title}}
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+  </el-card>
 </template>
 
 <script setup>
