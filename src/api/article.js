@@ -18,10 +18,37 @@ export function getArticleDetail(data) {
     })
 }
 
+// 编辑文章
+export function ArticleEdit(data) {
+    return request({
+        url: '/articleEdit',
+        method: 'POST',
+        data
+    })
+}
+
+// 编辑文章
+export function ArticleAdd(data) {
+    return request({
+        url: '/articleAdd',
+        method: 'POST',
+        data
+    })
+}
+
 // 获取分类
 export function getCateList(data) {
     return request({
         url: '/cates',
+        method: 'POST',
+        data
+    })
+}
+
+// 获取标签
+export function getTagList(data) {
+    return request({
+        url: '/tags',
         method: 'POST',
         data
     })

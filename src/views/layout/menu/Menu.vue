@@ -9,7 +9,7 @@
       @close="handleClose"
   >
     <el-menu-item>
-      <span>KarlXu Blog 后台</span>
+      <span>KarlXu's Blog 后台管理</span>
     </el-menu-item>
     <el-menu-item index="/">
       <el-icon><House /></el-icon>

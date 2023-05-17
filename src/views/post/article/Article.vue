@@ -14,7 +14,9 @@
       </el-form-item>
     </el-form>
     <div>
-      <el-button type="primary" :icon="Plus" >添加文章</el-button>
+      <router-link to="/article-add">
+        <el-button type="primary" :icon="Plus">添加文章</el-button>
+      </router-link>
     </div>
   </el-card>
   <el-card class="article-data">

@@ -27,7 +27,6 @@
               default-first-option
               :reserve-keyword="false"
               placeholder="标签"
-              @change="changeTag"
           >
             <el-option
                 v-for="item in tagOptions"
@@ -66,16 +65,14 @@
 
 <script setup>
 import {onMounted, reactive, ref} from 'vue'
-import router from "../../../router";
-import {ArticleEdit, getArticleDetail, getCateList, getTagList} from "../../../api/article";
+import {getCateList, ArticleAdd, getTagList} from "../../../api/article";
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import {ElMessage} from "element-plus";
 import Wangeditor from "../../../components/editor/Wangeditor.vue";
 
-const article_id = parseInt(router.currentRoute.value.params.article_id)
+
 const cateData = ref([])
 const articleData = reactive({
-  article_id: article_id,
   title: "",
   type: 0,
   author: "",
@@ -84,41 +81,25 @@ const articleData = reactive({
   content: "",
   cate: "",
   cate_id: 0,
-  tags: []
+  tags: [],
 })
 
 const getCates = async () => {
   await getCateList().then(res => {
     cateData.value = res.data
     getTags()
-    getArticle()
   })
-
 }
 
-const getArticle = async () => {
-  let res = await getArticleDetail({article_id : article_id})
-  articleData.title = res.data.title
-  articleData.cate_id = res.data.cate_id
-  articleData.cate = cateData.value[res.data.cate_id-1].name
-  articleData.type = res.data.type
-  articleData.author = res.data.author
-  articleData.sources = res.data.sources
-  articleData.abstract = res.data.abstract
-  articleData.content = res.data.content
-  let tags = []
-  for (let i = 0; i < res.data.article_tag.length; i++) {
-    tags.push(res.data.article_tag[i].tag)
-    // tags.push(res.data.article_tag[i].tag_id)
-  }
-  console.log('标签',tags)
-  tagValue.value = tags
+const getTags = async () => {
+  let res = await getTagList()
+  tagOptions.value = res.data
 }
 
 const rules = reactive({
   title: [
     { required: true, message: 'Please input Activity name', trigger: 'blur' },
-    { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
+    { min: 3, max: 100, message: 'Length should be 3 to 5', trigger: 'blur' },
   ],
   cate_id: [
     {
@@ -132,10 +113,6 @@ const rules = reactive({
   ],
 })
 
-const getTags = async () => {
-  let res = await getTagList()
-  tagOptions.value = res.data
-}
 
 const tagValue = ref([])
 const tagOptions = ref([
@@ -153,9 +130,6 @@ const tagOptions = ref([
   },
 ])
 
-const changeTag = (value) => {
-  console.log("value", value);
-}
 
 const changeCate = (val) => {
   articleData.cate_id = val === "" ? 0 : val
@@ -170,7 +144,7 @@ const submitForm = async () => {
     }
   }
   articleData.tags = tagValue.value
-  let res = await ArticleEdit(articleData)
+  let res = await ArticleAdd(articleData)
   ElMessage({
     message: res.message,
     type: 'success',

@@ -4,6 +4,7 @@ import Home from '../views/home/Home.vue'
 import Login from '../views/login/Login.vue'
 
 const Article = ()=>import('../views/post/article/Article.vue')
+const ArticleAdd = ()=>import('../views/post/article/ArticleAdd.vue')
 const ArticleEdit = ()=>import('../views/post/article/ArticleEdit.vue')
 const Category = ()=>import('../views/post/category/Category.vue')
 const Tag = ()=>import('../views/post/tag/Tag.vue')
@@ -40,6 +41,14 @@ const router = createRouter({
                             component: Article,
                             meta: {
                                 title: "文章列表"
+                            }
+                        },
+                        {
+                            path: '/article-add',
+                            name: 'article-add',
+                            component: ArticleAdd,
+                            meta: {
+                                title: "发布文章"
                             }
                         },
                         {
