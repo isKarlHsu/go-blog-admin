@@ -8,25 +8,20 @@
     />
     <Editor
         style="height: 500px; overflow-y: hidden;"
-        v-model="data.content"
+        v-model="contentHtml"
         :defaultConfig="editorConfig"
         :mode="mode"
         @onCreated="handleCreated"
+        @onChange="handleChange"
     />
   </div>
 </template>
 
 <script setup>
-import {onBeforeUnmount, shallowRef} from "vue";
+import {onBeforeUnmount, ref, shallowRef, toRefs} from "vue";
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 
-const data = defineProps({
-  content:{
-    type: String,
-    default: ""
-  }
-})
-
+const contentHtml = ref()
 const editorRef = shallowRef()
 
 const toolbarConfig = {}
@@ -85,7 +80,25 @@ onBeforeUnmount(() => {
 })
 
 const handleCreated = (editor) => {
+  contentHtml.value = content.value
   editorRef.value = editor // 记录 editor 实例，重要！
+}
+
+// 获取父组件的content
+const data = defineProps({
+  content:{
+    type: String,
+    default: ""
+  }
+})
+
+const {content} = toRefs(data)
+console.log("props", content)
+
+const emit = defineEmits(['editorData']);
+const handleChange = (editor) => {
+  let data = contentHtml.value
+  emit('editorData', data)
 }
 </script>
 

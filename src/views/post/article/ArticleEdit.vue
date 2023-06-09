@@ -53,7 +53,7 @@
           <el-input v-model="articleData.abstract" type="textarea"  :rows="10"/>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <Wangeditor :content="articleData.content"></Wangeditor>
+          <Wangeditor :content="articleData.content" @editorData="editorData" v-if="getOK"></Wangeditor>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm()">
@@ -72,6 +72,7 @@ import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import {ElMessage} from "element-plus";
 import Wangeditor from "../../../components/editor/Wangeditor.vue";
 
+const getOK = ref(false)
 const article_id = parseInt(router.currentRoute.value.params.article_id)
 const cateData = ref([])
 const articleData = reactive({
@@ -113,6 +114,7 @@ const getArticle = async () => {
   }
   console.log('标签',tags)
   tagValue.value = tags
+  getOK.value = true
 }
 
 const rules = reactive({
@@ -160,6 +162,10 @@ const changeTag = (value) => {
 const changeCate = (val) => {
   articleData.cate_id = val === "" ? 0 : val
   console.log('selectChange', articleData.cate_id)
+}
+
+const editorData = (val) => {
+  articleData.content = val
 }
 
 const submitForm = async () => {

@@ -52,7 +52,7 @@
           <el-input v-model="articleData.abstract" type="textarea"  :rows="10"/>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <Wangeditor :content="articleData.content"></Wangeditor>
+          <Wangeditor :content="articleData.content" @editorData="editorData"></Wangeditor>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm()">
@@ -134,6 +134,10 @@ const tagOptions = ref([
 const changeCate = (val) => {
   articleData.cate_id = val === "" ? 0 : val
   console.log('selectChange', articleData.cate_id)
+}
+
+const editorData = (val) => {
+  articleData.content = val
 }
 
 const submitForm = async () => {

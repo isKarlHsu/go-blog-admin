@@ -8,6 +8,7 @@ const ArticleAdd = ()=>import('../views/post/article/ArticleAdd.vue')
 const ArticleEdit = ()=>import('../views/post/article/ArticleEdit.vue')
 const Category = ()=>import('../views/post/category/Category.vue')
 const Tag = ()=>import('../views/post/tag/Tag.vue')
+const About = ()=>import('../views/system/About.vue')
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,7 +65,7 @@ const router = createRouter({
                             name: 'category',
                             component: Category,
                             meta: {
-                                title: "分类列表    "
+                                title: "分类列表"
                             }
                         },
                         {
@@ -76,6 +77,14 @@ const router = createRouter({
                             }
                         }
                     ]
+                },
+                {
+                    path: '/about',
+                    name: 'about',
+                    component: About,
+                    meta: {
+                        title: "关于我"
+                    }
                 }
             ]
         },
@@ -83,7 +92,7 @@ const router = createRouter({
             path: '/login',
             name: 'login',
             component: Login
-        }
+        },
     ]
 })
 

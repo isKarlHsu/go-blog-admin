@@ -29,7 +29,7 @@
         <el-icon><location /></el-icon>
         <span>系统管理</span>
       </template>
-      <el-menu-item index="3-1">item one</el-menu-item>
+      <el-menu-item index="/about">关于我</el-menu-item>
       <el-menu-item index="3-2">item two</el-menu-item>
     </el-sub-menu>
   </el-menu>
