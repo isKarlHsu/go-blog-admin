@@ -44,6 +44,15 @@ export function getCateList(data) {
         data
     })
 }
+// 获取分类
+export function CateEdit(data) {
+    return request({
+        url: '/cateEdit',
+        method: 'POST',
+        data
+    })
+}
+
 
 // 获取标签
 export function getTagList(data) {
