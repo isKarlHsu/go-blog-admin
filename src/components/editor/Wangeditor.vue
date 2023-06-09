@@ -19,6 +19,7 @@
 
 <script setup>
 import {onBeforeUnmount, ref, shallowRef, toRefs} from "vue";
+import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 
 const contentHtml = ref()
